@@ -1,0 +1,1 @@
+export const AJAXHOST = 'http://doc.freeh5.com/';

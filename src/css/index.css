@@ -1,0 +1,37 @@
+.App {
+
+}
+
+/*header*/
+header{height: 60px;}
+.navSearch{height: 60px;line-height: 60px;}
+.navSearch .fa-angle-left{color: #000;font-size: 28px;display: inline-block;margin: 0 20px;}
+.navSearch .fa-search{color: #8e9196;position: absolute;left: 4rem;top: 20px;}
+.navSearch input{border: 0;background-color:#eee;width: 60%;height: 32px;padding-left: 10%;}
+
+.wrapper{display: flex;background-color:#eee;padding-top: 2px;text-align: center;}
+.left-nav{flex:1;}
+.right-content{flex:3;padding: 10px;text-align: left;}
+.right-content h4{color: #8e9196;margin:10px 0 5px 0;}
+
+.left-nav li{
+  list-style: none;
+	height: 3rem;
+  line-height: 3rem;
+	background-color: #fff;
+	margin-bottom: 1px;
+}
+.left-nav li:hover,.left-nav li.current{background-color:#eee;color:#e54077;border-left:5px solid #C60A0A;  }
+
+.product-list li{
+  width: 80px;
+  height: 100px;
+  text-align: center;
+  background-color: #fff;
+  display: inline-block;
+  margin: 4px;
+  padding-top: 10px;
+}
+.product-list li a{color: #000;}
+.product-list li p{text-align: center;}
+.product-list img{width: 60px;height: 60px;}

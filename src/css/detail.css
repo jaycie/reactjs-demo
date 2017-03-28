@@ -1,0 +1,16 @@
+.detail{background-color: #eee}
+.detail-title{background-color: #fff;}
+.big-pic{
+  text-align: center;
+}
+.big-pic img{width: 100%;}
+.show-price{height: 4rem;line-height: 4rem;}
+.price{color: #ec9545;font-size: 2rem;padding-right: .6rem;padding-left: .6rem;}
+.promise{padding: .4rem .8rem;background-color: #f35e0c;color:#fff;}
+.certification{padding: .4rem .8rem;background-color: #ff8d00;color:#fff;}
+
+.detail-content{margin-top:10px;background-color: #fff;padding: .6rem 1rem;margin-bottom: 3.2rem;}
+
+.detail-button{display: flex;position: fixed;left: 0;bottom: 0;text-align: center;width: 100%;height: 3rem;line-height: 3rem;color: #fff;}
+.shop-car{flex:3;background-color: #FF9500}
+.buy{flex:2;background-color: #DD2727}
