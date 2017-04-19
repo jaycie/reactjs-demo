@@ -65,3 +65,12 @@ td,th{padding:0}
 /*common css */
 .clearfix::after {content: "";display: table;clear: both;}
 .hide{display: none;}
+.header{height: 47px;background-color:#e6e6e6;border-bottom: 1px #c1c1c5 solid;background-image: linear-gradient(#f2f2f2,#e6e6e6);}
+.header h1{line-height: 40px;text-align: center;height: 40px;font-size:1.25rem;color: #333;margin: 0 auto; }
+.mt-10{margin-top: 10px;}
+.bb-1{border-bottom: 1px solid #d2d2d2;}
+.ft-left{float: left;}
+.ft-right{float: right;}
+
+.span1{flex:1;}
+.span3{flex:3;}

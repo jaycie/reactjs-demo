@@ -1,0 +1,13 @@
+body{background-color: #eee;}
+.header{}
+.login-form{background-color: #fff;padding: 10px;}
+.login-list-ctrl{display: flex;padding: 10px 0;}
+.login-list-ctrl span{flex:3;}
+.login-list-ctrl input{flex:7;border:0;}
+
+.submit{margin: 1rem;}
+.button{background-color: #c40000;width: 100%;height: 3rem;line-height: 2rem;border: 1px solid #f40;border-radius: 5px;text-align: center;color: #fff;}
+.submit button:disabled{color: #d4d4d4;}
+
+.other-link{padding: 10px;}
+.other-link a{color: #c40000;}

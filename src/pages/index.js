@@ -14,7 +14,7 @@ export default class Index extends Component {
     this.state = {
       cityData: [],
       navCurrentProvinceId: '',  //选中的是哪一个省
-      productData:{}  //right side content
+      productData:{},  //right side content
     };
   }
   componentWillMount() {
@@ -31,7 +31,7 @@ export default class Index extends Component {
     return (
       <div className="App">
         <header>
-          <NavSearch />
+          <NavSearch searchCb={this.searchCb.bind(this)}/>
         </header>
         <div className="wrapper">
           <div className="left-nav">
@@ -49,6 +49,13 @@ export default class Index extends Component {
     );
   }
 
+
+  searchCb(data){
+    this.setState({
+      productData: data
+    });
+  }
+
   componentDidMount(){
     console.log('componentDidMount');
     // const url = 'http://ic.qingniao8.com/index.php/getnews/getIndex.shtml';
@@ -59,29 +66,29 @@ export default class Index extends Component {
     //   });
     // });
 
-    const url = AJAXHOST+'_data/micro/cities.js';
+    const url = AJAXHOST+'mall/provinces';
     corsPostFetch(url).then(obj => {
       console.log(obj);
-      if(obj.status===200){
-        const list = obj.list;
+      if(obj.code===200){
+        const list = obj.data;
         const provinceId = list[0].provinceId;
         this.setState({
           cityData: list,
           navCurrentProvinceId: provinceId  //首次默认选中第一个
         });
-
+        console.log(list);
         this.getProductByPID(provinceId);
       }
     });
   }
 
   getProductByPID(provinceId) {
-    const url2 = AJAXHOST+'_data/micro/product_'+provinceId+'.js';
+    const url2 = AJAXHOST+'mall/cities/'+provinceId;
     corsPostFetch(url2).then(data => {
       console.log(data);
-      if(data.status===200){
+      if(data.code===200){
         this.setState({
-          productData: data.list,
+          productData: data.data,
         });
       }
     });

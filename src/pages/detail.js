@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../css/base.css';
 import '../css/detail.css';
-import { AJAXHOST } from '../common/config';
+import { AJAXHOST, STATICHOST } from '../common/config';
 import { corsPostFetch } from '../api/apiFetch';
+import Auth from '../components/auth';
 
 export default class Detail extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class Detail extends Component {
       <div className="detail">
         <div className="detail-title">
           <div className="big-pic">
-            <img src={this.state.data.image} alt={this.state.data.title} />
+            <img src={`${STATICHOST}${this.state.data.image}`} alt={this.state.data.title} />
             <p>{this.state.data.title}</p>
           </div>
           <div className="show-price">
@@ -29,24 +30,42 @@ export default class Detail extends Component {
           </div>
         </div>
         <div className="detail-content">
-          {this.state.data.detail}
+          {this.state.data.introduce}
         </div>
 
         <div className="detail-button">
-          <div className="shop-car">加入购物车</div>
-          <div className="buy">立即购买</div>
+          <div className="shop-car" onClick={this.addCar.bind(this)}>加入购物车</div>
+          <div className="buy" onClick={this.buy.bind(this)}>立即购买</div>
         </div>
       </div>
     );
   }
 
+  buy() {
+    if(Auth.loggedIn()){
+      console.log('loged');
+      localStorage.order=JSON.stringify(this.state.data);
+      window.location.href="/order";
+    }else{
+      window.location.href="/login";
+    }
+  }
+
+  addCar() {
+    if(Auth.loggedIn()){
+      console.log('loged');
+      localStorage.order=JSON.stringify(this.state.data);
+    }else{
+      window.location.href="/login";
+    }
+  }
+
   componentDidMount(){
-    const url = AJAXHOST+'_data/micro/product_detail.js';
+    const url = AJAXHOST+'mall/product_detail/'+this.state.productId;
     corsPostFetch(url).then(obj => {
-      console.log(obj);
-      if(obj.status===200){
+      if(obj.code===200){
         this.setState({
-          data: obj.list
+          data: obj.data[0]
         });
       }
     });

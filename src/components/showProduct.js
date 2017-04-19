@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { STATICHOST } from '../common/config';
 
 export default class ShowProduct extends Component {
   constructor(props) {
@@ -13,13 +14,22 @@ export default class ShowProduct extends Component {
   render() {
     let list = '';
     if(this.state.data[0]){
-      if(this.state.data[0].cityId){  //从导航进来，带市、区
-        list = this.state.data.map((value,index)=> {
-          let _list = value.data.map((_value, _index) => {
+      if(this.state.data[0].cityid){  //从导航进来，带市、区
+        var newData = [];
+        this.state.data.map(function(v){
+          if(!newData[v.cityid]){
+            newData[v.cityid] = [];    
+          }
+          newData[v.cityid].push(v);
+          newData[v.cityid].cityname = v.cityname;
+          return newData;
+        });
+        list = newData.map((value,index)=> {
+          let _list = value.map((_value, _index) => {
             return (
               <li key={_index}>
                 <Link to={`/detail/${_value.productId}`}>
-                  <img src={_value.src} alt={_value.title} />
+                  <img src={`${STATICHOST}${_value.image}`} alt={_value.title} />
                   <p>{_value.title}</p>
                 </Link>
               </li>
@@ -27,7 +37,7 @@ export default class ShowProduct extends Component {
           });
           return (
             <div key={index}>
-              <h4>{value.cityName}特产</h4>
+              <h4>{value.cityname}特产</h4>
                 <ul className="product-list">
                   {_list}
                 </ul>

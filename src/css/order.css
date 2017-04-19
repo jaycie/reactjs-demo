@@ -1,0 +1,10 @@
+.address{background-color: #fff;margin-bottom: 5px;padding: 10px;}
+
+.shopping{display: flex;background-color: #fff;padding: 10px;}
+.shopping .span3{margin: 0 5px;}
+.price{color:#f50;font-weight: bold;}
+
+
+.shop-info{flex:3;background-color: #fff;color: #666}
+.shop-info span{color: #f50}
+.buy-submit{flex:2;background-color: #f50}

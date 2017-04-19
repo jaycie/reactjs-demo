@@ -4,7 +4,7 @@
 
 /*header*/
 header{height: 60px;}
-.navSearch{height: 60px;line-height: 60px;}
+.navSearch{height: 60px;line-height: 60px;background-color: #fff;}
 .navSearch .fa-angle-left{color: #000;font-size: 28px;display: inline-block;margin: 0 20px;}
 .navSearch .fa-search{color: #8e9196;position: absolute;left: 4rem;top: 20px;}
 .navSearch input{border: 0;background-color:#eee;width: 60%;height: 32px;padding-left: 10%;}
@@ -25,13 +25,12 @@ header{height: 60px;}
 
 .product-list li{
   width: 80px;
-  height: 100px;
   text-align: center;
   background-color: #fff;
   display: inline-block;
   margin: 4px;
-  padding-top: 10px;
+  padding: 10px 0 10px 0;
 }
 .product-list li a{color: #000;}
-.product-list li p{text-align: center;}
+.product-list li p{text-align: center;overflow: hidden;white-space: nowrap;margin-top: 4px;font-size: .9rem;}
 .product-list img{width: 60px;height: 60px;}
