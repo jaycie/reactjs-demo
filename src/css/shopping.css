@@ -1,0 +1,19 @@
+#shopping>.header{
+	text-align: center;
+	line-height: 47px;
+	position: relative;
+	font-size: 1rem;
+}
+#shopping .fa-angle-left {
+    color: #000;
+    font-size: 28px;
+    display: inline-block;
+    margin: 0 20px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+   }
+ .shopping{
+ 	margin-bottom: 10px;
+ }
+.buy-submit>a{color: #fff;}

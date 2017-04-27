@@ -1,0 +1,47 @@
+.Receiving_address>.header{
+	text-align: center;
+	line-height: 47px;
+	position: relative;
+	font-size: 1rem;
+}
+.Receiving_address .fa-angle-left {
+    color: #000;
+    font-size: 28px;
+    display: inline-block;
+    margin: 0 20px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+   }
+ .foont>button{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 3rem;
+    line-height: 3rem;
+    background-color: #f50;
+    width: 100%;
+    text-align: center;
+    border: none;
+ }
+ .foont>button>a{
+ 	color: #fff;
+ }
+.Detail_address{
+	width: 92%;
+	padding: 4%;
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+} 
+.Detail_address a{color: #333;}
+.Detail_address>p{
+	margin-bottom: 10px;
+}
+.Detail_address .right{
+	float: right;
+	margin-right: 2.3rem;
+}
+.red{
+	background-color: royalblue;
+	color: #fff;
+}
