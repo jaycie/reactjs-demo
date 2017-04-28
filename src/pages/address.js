@@ -1,13 +1,10 @@
 import React, {
 	Component
 } from 'react';
-import { Link } from 'react-router-dom';
 import '../css/base.css';
 import '../css/address.css';
-import { AJAXHOST, STATICHOST } from '../common/config';
+import { AJAXHOST} from '../common/config';
 import { corsPostFetch } from '../api/apiFetch';
-import Auth from '../components/auth';
-
 export default class Address extends Component {
 	constructor(props) {
 		super(props);
@@ -112,25 +109,25 @@ export default class Address extends Component {
 		var province = document.getElementById('province'),
 			city = document.getElementById('city'),
 			areas = document.getElementById('area');
-			var URL=th==undefined?province.value:th;
+			var URL=th===undefined?province.value:th;
 			const url1 = AJAXHOST + 'frequent/cities/' +URL
 		console.log(url1)
 		corsPostFetch(url1).then(dat => {
 			const list = dat.data;
 			if(dat.code === 200) {
-				if(th==province.value){
+				if(th===province.value){
 					for(var i = 0; i < list.length; i++) {
-					var op = new Option(list[i].name, list[i].id);
+					let op = new Option(list[i].name, list[i].id);
 					city.options.add(op);
 				}	
-				}else if(th==city.value){
-					for(var i = 0; i < list.length; i++) {
-					var op = new Option(list[i].name, list[i].id);
+				}else if(th===city.value){
+					for(let i = 0; i < list.length; i++) {
+					let op = new Option(list[i].name, list[i].id);
 					areas.options.add(op);
 				}						
 				}else{
-									for(var i = 0; i < list.length; i++) {
-					var op = new Option(list[i].name, list[i].id);
+									for(let i = 0; i < list.length; i++) {
+					let op = new Option(list[i].name, list[i].id);
 					province.options.add(op);
 				}
 				}

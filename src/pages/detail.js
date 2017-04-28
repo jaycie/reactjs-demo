@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import '../css/base.css';
 import '../css/detail.css';
-import { Link } from 'react-router-dom';
 import { AJAXHOST, STATICHOST } from '../common/config';
 import { corsPostFetch } from '../api/apiFetch';
 import Auth from '../components/auth';
@@ -14,8 +13,7 @@ export default class Detail extends Component {
 
 		this.state = {
 			productId: this.props.match.params.productId,
-			data: '',
-			article: '', //需要购买的东西
+			data: ''
 		};
 	}
 
@@ -60,15 +58,11 @@ export default class Detail extends Component {
 		if(Auth.loggedIn()) {
 			console.log('loged');
 			localStorage.order = JSON.stringify(this.state.data);
-			alert('你已成功加入购物车')
+			alert('已加了购物车')
+			this.res();
 		} else {			
 			window.location.href = "/login";
 		}
-	}
-	componentWillMount(){
-						this.setState({
-			article: JSON.parse(localStorage.getItem('order'))
-		});
 	}
 	componentDidMount() {
 		const url = AJAXHOST + 'mall/product_detail/' + this.state.productId;
@@ -79,9 +73,8 @@ export default class Detail extends Component {
 				});
 			}
 		});
-					this.res();
 	}
 	res() {
-		localStorage.setItem('id' + this.state.article.id + '', localStorage.getItem('order'))
+		localStorage.setItem('id' + JSON.parse(localStorage.getItem('order')).id + '', localStorage.getItem('order'))
 	}
 }

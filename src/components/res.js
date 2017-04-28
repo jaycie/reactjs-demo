@@ -20,7 +20,7 @@ export default class Res extends Component {
 			Index = 0;
 		this.setState({
 			res: arry.map((Number, index) => {
-				numbe += parseInt(Number.price);
+				numbe += parseInt(Number.price,10);
 				Index = (index + 1)
 				return(
 					<div className="shopping" key={Number.id}>
@@ -38,7 +38,7 @@ export default class Res extends Component {
 		let url1=document.URL;
 		var num=url1.indexOf("?");
    			url1=url1.substr(num+1);
-		let res = url1=='0'?
+		let res = url1==='0'?
 			(
 		<div>
 			<div className="shopping">
