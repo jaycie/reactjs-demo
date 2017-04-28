@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import '../css/base.css';
 import '../css/detail.css';
 import '../css/order.css';
-import { AJAXHOST, STATICHOST } from '../common/config';
+import { AJAXHOST} from '../common/config';
 import { corsPostFetch } from '../api/apiFetch';
-import Auth from '../components/auth';
 import Res from '../components/res';
 
 export default class Order extends Component {

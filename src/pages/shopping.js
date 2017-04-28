@@ -2,7 +2,7 @@ import React, {
 	Component
 } from 'react';
 import '../css/base.css';
-import '../css/shopping.css'; 
+import '../css/shopping.css';
 import { Link } from 'react-router-dom';
 import { STATICHOST } from '../common/config';
 export default class Shopping extends Component {
@@ -10,39 +10,38 @@ export default class Shopping extends Component {
 		super(props);
 		this.state = {
 			numbers: 0,
-			money: '',		
+			money: ''
 		}
 	}
 	componentDidMount() {
-		localStorage.setItem('key','')
+		localStorage.setItem('key', '0')
 		let arry = [];
-		for(var i =0; i < localStorage.length-4; i++) {
+		for(var i = 0; i < localStorage.length - 4; i++) {
 			arry.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
 		}
-		console.log(arry)
-		var numbe=0,
-			Index=0;
-		this.setState({		
-			res: arry.map((Number,index) => {
-				numbe+=parseInt(Number.price);
-				Index=(index+1)
+		var numbe = 0,
+			Index = 0;
+		this.setState({
+			res: arry.map((Number, index) => {
+				numbe += parseInt(Number.price,10);
+				Index = (index + 1)
 				return(
-					<div className="shopping" key={Number.id}>
+					<div className="shopping" key={Number.id} id={Number.id}>
           				<span className="span1"><img src={`${STATICHOST}${Number.image}`} alt={Number.title} /></span>
           				<span className="span3">{Number.title}</span>
           				<span className="span1 price">¥{Number.price}</span>
-       			</div>
+       				</div>
 				);
 			}),
-			money:numbe,
-			numbers:Index
+			money: numbe,
+			numbers: Index
 		});
 	}
 	render() {
 		return(
 			<div id="shopping">
 				<div className='header'>
-					<a href="javascript:history.go(-1)"><i className="fa fa-angle-left"></i></a>
+					<i className="fa fa-angle-left"></i>
 					购物车({this.state.numbers})
 				</div>
 				<div className="substance">

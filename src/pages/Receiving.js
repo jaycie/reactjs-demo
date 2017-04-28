@@ -4,9 +4,8 @@ import React, {
 import '../css/base.css';
 import '../css/Receiving.css';
 import { Link } from 'react-router-dom';
-import { AJAXHOST, STATICHOST } from '../common/config';
+import { AJAXHOST} from '../common/config';
 import { corsPostFetch } from '../api/apiFetch';
-import Auth from '../components/auth';
 export default class Receiving extends Component {
 	constructor(props) {
 		super(props);
