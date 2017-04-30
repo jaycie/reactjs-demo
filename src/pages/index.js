@@ -5,6 +5,7 @@ import '../css/fontAwesome/css/font-awesome.min.css';
 import NavSearch from '../components/navSearch';
 import ShowProduct from '../components/showProduct';
 import { AJAXHOST } from '../common/config';
+import { Link } from 'react-router-dom';
 import { corsPostFetch } from '../api/apiFetch';
 
 export default class Index extends Component {
@@ -43,6 +44,10 @@ export default class Index extends Component {
           <div className="right-content">
             <ShowProduct data={this.state.productData} />
           </div>
+          
+          <div className="button_shopping">
+          	<Link to='/shopping'>购物车</Link>
+          </div>
         </div>
         
       </div>
@@ -57,6 +62,7 @@ export default class Index extends Component {
   }
 
   componentDidMount(){
+  	localStorage.setItem('key', '0')
     console.log('componentDidMount');
     // const url = 'http://ic.qingniao8.com/index.php/getnews/getIndex.shtml';
     // corsPostFetch(url, 'type=16&limit=8').then(obj => {

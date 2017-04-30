@@ -56,7 +56,7 @@ export default class Receiving extends Component {
 		return(
 			<div className='Receiving_address'>
 				<div className='header'>
-					<i className="fa fa-angle-left"></i>
+					<Link to="/order"><i className="fa fa-angle-left"></i></Link>
 					管理收货地址
 				</div>
 				<div className="center">

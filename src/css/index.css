@@ -16,8 +16,7 @@ header{height: 60px;}
 
 .left-nav li{
   list-style: none;
-	height: 3rem;
-  line-height: 3rem;
+	padding: 1rem 0;
 	background-color: #fff;
 	margin-bottom: 1px;
 }
@@ -34,3 +33,18 @@ header{height: 60px;}
 .product-list li a{color: #000;}
 .product-list li p{text-align: center;overflow: hidden;white-space: nowrap;margin-top: 4px;font-size: .9rem;}
 .product-list img{width: 60px;height: 60px;}
+
+
+/*4.30修改*/
+.button_shopping{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 1rem 0;
+	text-align: center;
+	background-color: #fff;
+}
+.button_shopping>a{
+	color: #000;
+	
+}
