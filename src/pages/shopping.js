@@ -14,7 +14,6 @@ export default class Shopping extends Component {
 		}
 	}
 	componentDidMount() {
-		localStorage.setItem('key', '0')
 		let arry = [];
 		for(var i = 0; i < localStorage.length - 4; i++) {
 			arry.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
@@ -41,7 +40,7 @@ export default class Shopping extends Component {
 		return(
 			<div id="shopping">
 				<div className='header'>
-					<i className="fa fa-angle-left"></i>
+					<Link to="/"><i className="fa fa-angle-left"></i></Link>
 					购物车({this.state.numbers})
 				</div>
 				<div className="substance">
