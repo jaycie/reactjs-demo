@@ -33,6 +33,7 @@ export default class Detail extends Component {
 		})
 		return(
 			<div className="detail">
+			112
         <div className="detail-title">
           <div className="big-pic" onTouchStart={this.Carousel.bind(this)} onTouchMove={this.glide.bind(this)} onTouchEnd={this.lift.bind(this)}>
           	<div id="photograph" ref='myimg' style={this.state.width}>
