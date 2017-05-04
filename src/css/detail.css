@@ -6,6 +6,9 @@
   overflow: hidden;
   position: relative;
 }
+.big-pic img{
+	height: 23.5rem;
+}
 .show-price{height: 4rem;line-height: 4rem;}
 .price{color: #ec9545;font-size: 2rem;padding-right: .6rem;padding-left: .6rem;}
 .promise{padding: .4rem .8rem;background-color: #f35e0c;color:#fff;}
@@ -29,7 +32,7 @@
 	color: #666666;
 }
 #photograph{
-	transition:all 1s ;
+	position: relative;
 }
 .nav{
 		position: relative;

@@ -16,25 +16,27 @@ export default class Detail extends Component {
 			data: '',
 			left: 'left',
 			arrays: [],
+			id: 0, //选中的第几张
+			startPoint:0,
+			startEle:0,
       area: '',  //产品所在区域
       transport: '', //运费
       package_id: '', // 微商套餐
-      package_info: '',
-			id: 0 //选中的第几张
+      package_info: ''
 		};
 	}
 
 	render() {
 		const Li = this.state.arrays.map((value, index) => {
 			let cls = index === this.state.id ? 'color' : '';
-			return(<span key={index} className={cls} onClick={this.Carousel.bind(this,index)}></span>)
+			return(<span key={index} className={cls}></span>)
 		})
 		return(
 			<div className="detail">
         <div className="detail-title">
-          <div className="big-pic">
+          <div className="big-pic" onTouchStart={this.Carousel.bind(this)} onTouchMove={this.glide.bind(this)} onTouchEnd={this.lift.bind(this)}>
           	<div id="photograph" ref='myimg' style={this.state.width}>
-            <span><img src={`${STATICHOST}${this.state.data.image}`} alt={this.state.data.title} style={this.state.imgwidth} /></span>
+            <span><img src={`${STATICHOST}${this.state.data.image}`} alt={this.state.data.title} style={this.state.imgwidth}/></span>
             {this.state.arrayss}
             </div>
             <div className="nav" style={this.state.bom}>
@@ -84,7 +86,41 @@ export default class Detail extends Component {
 	share() {
 
 	}
+	Carousel(event) {
+		let box = document.getElementById('photograph');
+		this.setState({
+        	startPoint:event.changedTouches[0].pageX,
+        	startEle:box.offsetLeft
+		})
+	}
+	
+	glide(event){
+		let box = document.getElementById('photograph');
+		let Span = document.querySelectorAll('.big-pic span');
+        let currPoint = event.changedTouches[0].pageX;
+        let	disX= currPoint - this.state.startPoint;
+        let left = this.state.startEle + disX;	
+        if(Span.length===1){
+        	box.style.left ='0px';
+        }else{
+        	box.style.left = left + 'px';
+        }
 
+	}
+	lift(event){	
+		let box = document.querySelector('#photograph');
+		let aLi = this.refs.myimg.childNodes;
+		let wrap = document.querySelector('.big-pic');
+		let left = box.offsetLeft;
+		let aLiWidth = wrap.offsetWidth;
+        let currNum = Math.round(-left/aLiWidth);
+        currNum = currNum>=(aLi.length-1) ? aLi.length-1 : currNum;
+        currNum = currNum<=0 ? 0 : currNum;
+        box.style.left = -currNum*wrap.offsetWidth + 'px';
+         	         this.setState({
+         	id:currNum
+         })
+	}
 	collect(event) {
 		const url1 = AJAXHOST + 'mall/follow/' + localStorage.uid + '/' + this.state.productId;
 		corsPostFetch(url1).then(objt => {
@@ -121,28 +157,18 @@ export default class Detail extends Component {
 
 	photograph() {
 		let span = this.refs.myimg.childNodes;
-		console.log(span)
 		let arrays = [];
 		this.setState({
 			width: {
 				width: span.length * 100 + '%'
 			}
 		})
-		for(let i = 0; i < span.length; i++) {
+		for(let i = 0; i < span.length; i++) {			
 			arrays.push(span[i]);
-			span[i].setAttribute(this.state.left, span[i].offsetLeft)
 		}
 		this.setState({
 			arrays: arrays
 		});
-	}
-	Carousel(pid) {
-		let span = this.refs.myimg.childNodes;
-		console.log(span.length * 100)
-		this.setState({
-			id: pid
-		});
-		this.refs.myimg.style = 'margin-left:-' + span[pid].getAttribute(this.state.left) + 'px;width:' + (span.length * 100) + '%'
 	}
   showPackage() {
     if(this.state.package_id){
@@ -175,7 +201,7 @@ export default class Detail extends Component {
 					width: 100 / (obj.data[0].images.split(',').length + 1) + '%'
 				}
 				let arry = obj.data[0].images === null ? '' : obj.data[0].images.split(',').map((value, index) => {
-					return(<span key={index}><img src={`${STATICHOST}${value}`} alt={this.state.data.title} style={imgwidth}/></span>)
+					return(<span key={index} ><img src={`${STATICHOST}${value}`} alt={this.state.data.title} style={imgwidth} /></span>)
 				});
 				this.setState({
 					data: obj.data[0],
@@ -187,7 +213,9 @@ export default class Detail extends Component {
 				if(obj.data[0].images !== null) {
 					this.photograph()
 					this.setState({
-						bom:{marginTop:'-1rem'}
+						bom: {
+							marginTop: '-1rem'
+						}
 					})
 				}
 
@@ -196,7 +224,7 @@ export default class Detail extends Component {
         corsPostFetch(url).then(obj2 => {
           if(obj2.code === 200) {
             let d = obj2.data[0];
-            let _transport = parseInt(d.need_money)===1 ? '￥'+d.min_money : 0;
+            let _transport = parseInt(d.need_money,10)===1 ? '￥'+d.min_money : 0;
             this.setState({
               transport: _transport
             });
