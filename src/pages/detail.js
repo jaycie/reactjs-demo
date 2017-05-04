@@ -18,7 +18,11 @@ export default class Detail extends Component {
 			arrays: [],
 			id: 0, //选中的第几张
 			startPoint:0,
-			startEle:0
+			startEle:0,
+      area: '',  //产品所在区域
+      transport: '', //运费
+      package_id: '', // 微商套餐
+      package_info: ''
 		};
 	}
 
@@ -49,9 +53,25 @@ export default class Detail extends Component {
             <span className="certification">小二已实名认证</span>
             <span className="share">分享</span>
           </div>
+
+          <div className="detail-info">
+            <span className="span1">快递: {this.state.transport}</span>
+            <span className="span1">月销量: 0</span>
+            <span className="span1">0 关注</span>
+            <span className="span1">{this.state.area}</span>
+          </div>
         </div>
         <div className="detail-content">
-          {this.state.data.introduce}
+          <div className="package">
+            <button onClick={this.showPackage.bind(this)}>点击查看微商套餐</button> <span>成为会员方可购买微商套餐</span>
+          </div>
+          <div className="package-info">
+            {this.state.package_info}
+          </div>
+          <div className="introduce">
+            {this.state.data.introduce}
+          </div>
+          
         </div>
 
         <div className="detail-button">
@@ -150,10 +170,31 @@ export default class Detail extends Component {
 			arrays: arrays
 		});
 	}
+  showPackage() {
+    if(this.state.package_id){
+      if(this.state.package_info===""){
+        const url = AJAXHOST + 'mall/package/' + this.state.package_id;
+        corsPostFetch(url).then(obj => {
+          if(obj.code === 200) {
+            let d = obj.data;
+            let _info = d.map((value,index)=>{
+              return (<ul key={index}><li><strong>套餐{index+1}:</strong>{value.price}元</li><li><strong>描述:</strong>{value.description}元</li></ul>);
+            });
+            this.setState({
+              package_info: _info
+            });
+          }
+        });
+      }
+    }else{
+      alert('改产品不支持微商套餐');
+    } 
+  }
 	componentDidMount() {
 		const url = AJAXHOST + 'mall/product_detail/' + this.state.productId;
 		corsPostFetch(url).then(obj => {
 			if(obj.code === 200) {
+        let d = obj.data[0];
 				let imgwidth = obj.data[0].images === null ? {
 					width: '100%'
 				} : {
@@ -165,7 +206,9 @@ export default class Detail extends Component {
 				this.setState({
 					data: obj.data[0],
 					arrayss: arry,
-					imgwidth: imgwidth
+					imgwidth: imgwidth,
+          area: d.provincename+' '+d.cityname,
+          package_id: d.package_id
 				});
 				if(obj.data[0].images !== null) {
 					this.photograph()
@@ -175,6 +218,18 @@ export default class Detail extends Component {
 						}
 					})
 				}
+
+        //获取快递费
+        const url = AJAXHOST + 'mall/transport/' + d.transport_id;
+        corsPostFetch(url).then(obj2 => {
+          if(obj2.code === 200) {
+            let d = obj2.data[0];
+            let _transport = parseInt(d.need_money,10)===1 ? '￥'+d.min_money : 0;
+            this.setState({
+              transport: _transport
+            });
+          }
+        });
 			}
 		});
 	}
