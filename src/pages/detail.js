@@ -33,7 +33,6 @@ export default class Detail extends Component {
 		})
 		return(
 			<div className="detail">
-			111111111111111
         <div className="detail-title">
           <div className="big-pic" onTouchStart={this.Carousel.bind(this)} onTouchMove={this.glide.bind(this)} onTouchEnd={this.lift.bind(this)}>
           	<div id="photograph" ref='myimg' style={this.state.width}>
@@ -100,7 +99,7 @@ export default class Detail extends Component {
 		let Span = document.querySelectorAll('.big-pic span');
         let currPoint = event.changedTouches[0].pageX;
         let	disX= currPoint - this.state.startPoint;
-        let left = this.state.startEle + disX;	
+        let left = this.state.startEle + disX*12;
         if(Span.length===1){
         	box.style.left ='0px';
         }else{
