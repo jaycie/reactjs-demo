@@ -99,7 +99,7 @@ export default class Detail extends Component {
 		let Span = document.querySelectorAll('.big-pic span');
         let currPoint = event.changedTouches[0].pageX;
         let	disX= currPoint - this.state.startPoint;
-        let left = this.state.startEle + disX*12;
+        let left = this.state.startEle + disX*3;
         if(Span.length===1){
         	box.style.left ='0px';
         }else{
